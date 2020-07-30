@@ -18,16 +18,19 @@ const HelloWithConst = (props) => <h2>{props.title}</h2>
 
 class Text extends Component{
     render() {
-        const textSegunBolean = this.props.boolean ? 'Cierto' : 'Negativo'
-        const mappedNumbers = this.props.arrayofNumbers.map(n => n * 2)
+        const { isActivated, arrayofNumbers, multiply, title } = this.props
+
+        const textSegunBolean = isActivated? 'Cierto' : 'Negativo'
+        const mappedNumbers = arrayofNumbers.map(multiply)
         return <div>
-            <p>{this.props.text}</p>
-            <p>{this.props.number}</p>
+            <p>Propiedades del titulo: {title}</p>
+            <p>Propiedades de text: {this.props.text}</p>
+            <p>Propiedades de number: {this.props.number}</p>
             {/*<p>{JSON.stringify(this.props.boolean)}</p>*/}
-            <p>{textSegunBolean}</p>
-            <p>{this.props.arrayofNumbers.join(', ')}</p>
-            <p>{mappedNumbers.join(', ')}</p>
-            <p>{this.props.objectWithInfo.key2}</p>
+            <p>Constante textSegunBolean: {textSegunBolean}</p>
+            <p>Propiedades de arrayofNumbers con espacio y comas:{this.props.arrayofNumbers.join(', ')}</p>
+            <p>Constante mappedNumbers: {mappedNumbers.join(', ')}</p>
+            <p>Objeto de objectWithInfo: {this.props.objectWithInfo.key2}</p>
 
 
         </div>
@@ -59,9 +62,11 @@ class App extends Component {
               <Text
                   arrayofNumbers={[2,3,10]}
                   objectWithInfo = {{key: 'First value', key2: 'otherValue'}}
+                  multiply={(number) => number * 4}
                   number={2}
                   text='Texto en string'
-                  boolean={false}/>
+                  title={<h1>Este es el Titulo</h1>}
+                  isActivated={false}/>
           </header>
         </div>
     );
