@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Contadores from "./Contador";
 
 
 class HelloWithClass extends Component{
@@ -15,6 +16,56 @@ function Hello (props) {
 }
 
 const HelloWithConst = (props) => <h2>{props.title}</h2>
+
+class TitleText extends Component {
+    render() {
+        return <h1>{this.props.text}</h1>
+    }
+}
+
+TitleText.defaultProps = { text: 'Text por defecto'}
+
+
+class Contador extends Component{
+    constructor() {
+        super();
+        this.state = {contador: 1}
+    }
+
+    render() {
+        return <span>{this.state.contador}</span>
+    }
+
+}
+
+class EstadoComponente extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {cont: 2}
+    }
+    render() {
+        return(
+          <div>
+              <h2>El Contador esta a {this.state.cont}</h2>
+          </div>
+        );
+    }
+
+}
+
+
+class EstadoComponenteSegundo extends Component {
+   state = {contar: 0};
+    render() {
+        return(
+            <div>
+                <h2>El Contador segundo esta a {this.state.contar}</h2>
+            </div>
+        );
+    }
+
+}
+
 
 class Text extends Component{
     render() {
@@ -47,6 +98,11 @@ class App extends Component {
             <Hello title = 'Hello from props' />
             <HelloWithConst title = 'Hello from props with const' />
             <HelloWithClass title = 'Hello from props with another class' />
+            <Contadores/>
+            <EstadoComponenteSegundo/>
+            <TitleText/>
+            <Contador />
+            <EstadoComponente/>
 
               <p>
               Edit <code>src/App.js</code> and save to reload.
