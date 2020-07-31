@@ -66,6 +66,35 @@ class EstadoComponenteSegundo extends Component {
 
 }
 
+class ContadorSetState extends Component {
+    constructor(props) {
+        super(props);
+        console.log(this.props.contadorInitial)
+        this.state = {contador: this.props.contadorInitial}
+        setInterval(() => {
+            this.setState({contador: this.state.contador + 1})
+        }, 1000)
+    }
+
+    render() {
+        return (<ContadorNumero numero={this.state.contador}/>)
+    }
+}
+
+    ContadorSetState.defaultProps = {contadorInitial: 0}
+
+
+
+class ContadorNumero extends Component{
+    render() {
+     console.log('ContadorNumero render()')
+        return <span>{this.props.numero}</span>
+    }
+
+}
+
+
+
 
 class Text extends Component{
     render() {
@@ -100,6 +129,7 @@ class App extends Component {
             <HelloWithClass title = 'Hello from props with another class' />
             <Contadores/>
             <EstadoComponenteSegundo/>
+            <ContadorSetState contadorInitial={100}/>
             <TitleText/>
             <Contador />
             <EstadoComponente/>
