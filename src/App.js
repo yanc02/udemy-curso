@@ -2,7 +2,23 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Contadores from "./Contador";
+import ConditionalSection from "./sections/conditional";
+import cars from './data/cars.json'
 
+class CarItem extends Component{
+    render() {
+        const { car, id } = this.props
+        return (
+            <li>
+                <p>Key: {id}</p>
+                <p><strong>Nombre: </strong>{car.name}</p>
+                <p><strong>Marca: </strong>{car.company}</p>
+
+            </li>
+        )
+    }
+
+}
 
 class HelloWithClass extends Component{
     render() {
@@ -81,9 +97,7 @@ class ContadorSetState extends Component {
     }
 }
 
-    ContadorSetState.defaultProps = {contadorInitial: 0}
-
-
+ContadorSetState.defaultProps = {contadorInitial: 0}
 
 class ContadorNumero extends Component{
     render() {
@@ -92,9 +106,6 @@ class ContadorNumero extends Component{
     }
 
 }
-
-
-
 
 class Text extends Component{
     render() {
@@ -120,6 +131,7 @@ class Text extends Component{
 
 class App extends Component {
   render() {
+      const numbers = [1, 1, 3, 4, 5]
     return (
         <div className="App">
           <header className="App-header">
@@ -153,6 +165,36 @@ class App extends Component {
                   text='Texto en string'
                   title={<h1>Este es el Titulo</h1>}
                   isActivated={false}/>
+              <ConditionalSection />
+
+              <h4>Trabajando con Lista</h4>
+
+              {numbers.map((number, index) => { return <p key={index}>Soy el Numero {number}</p>})}
+
+              <h4>Trabajando con Lista de Json</h4>
+              <ul>
+                  {
+                    cars.map(car => {
+                        return (
+                          <li key = {car.id}>
+                              <p><strong>Nombre: </strong>{car.name}</p>
+                              <p><strong>Marca: </strong>{car.company}</p>
+
+                          </li>
+                        )
+                  })
+              }
+              </ul>
+              <h4>Trabajando con Lista de Json en componenete</h4>
+
+              <ul>
+                  {
+                      cars.map(car => {
+                          return <CarItem id={car.id} key = {car.id} car = {car} />
+                      })
+                  }
+              </ul>
+
           </header>
         </div>
     );
