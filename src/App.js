@@ -4,6 +4,7 @@ import './App.css';
 import Contadores from "./Contador";
 import ConditionalSection from "./sections/conditional";
 import cars from './data/cars.json'
+import Forms from "./sections/forms";
 
 class CarItem extends Component{
     render() {
@@ -130,6 +131,28 @@ class Text extends Component{
 }
 
 class App extends Component {
+    constructor() {
+        super()
+        this.state = {mouseX: 0, mouseY: 0}
+        this.handleMouseMove = this.handleMouseMove.bind(this)
+
+    }
+
+    handleMouseMove (e) {
+        const { clientX, clientY } = e
+        this.setState({mouseX: clientX, mouseY: clientY})
+    }
+
+    handleMouseMoved = (e) => {
+        const { clientX, clientY } = e
+        this.setState({mouseX: clientX, mouseY: clientY})
+    }
+
+    handleClick (e) {
+        console.log(e)
+        // console.log(e.nativeEvent)
+        alert('hi there!!')
+    }
   render() {
       const numbers = [1, 1, 3, 4, 5]
     return (
@@ -194,6 +217,31 @@ class App extends Component {
                       })
                   }
               </ul>
+
+              <h4>Eventos</h4>
+              <button onClick={() => alert('Hi here!')}>Hi there!</button>
+
+              {/*<h4>Eventos Sintetico</h4>*/}
+              {/*<button onClick={this.handleClick()}>Hi there!</button>*/}
+
+              <div
+                  onMouseMove={this.handleMouseMove}
+                  style={{ border: '1px solid #000', marginTop: 10, padding: 18 }}>
+                  <p>{this.state.mouseX}, {this.state.mouseY}</p>
+              </div>
+
+              <h4>Formas mas Limpia</h4>
+
+              <div
+                  onMouseMove={this.handleMouseMoved}
+                  style={{ border: '1px solid #000', marginTop: 10, padding: 18 }}>
+                  <p>{this.state.mouseX}, {this.state.mouseY}</p>
+              </div>
+
+              <h4>Formularios</h4>
+
+              <Forms/>
+
 
           </header>
         </div>
