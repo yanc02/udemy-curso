@@ -5,6 +5,107 @@ import Contadores from "./Contador";
 import ConditionalSection from "./sections/conditional";
 import cars from './data/cars.json'
 import Forms from "./sections/forms";
+import PropTypes from 'prop-types'
+
+
+
+
+
+
+
+class ArticleWithConditionAndPropTypes extends Component {
+    //Forma mas comun
+    static propTypes = {
+        author: PropTypes.string.isRequired
+    }
+
+    render() {
+        const {author, children, date, title } =this.props
+        return (
+            <section style={{borderBottom: '1px solid #100', marginBotton: 50 }}>
+                <h2>{title}</h2>
+                {author && <p><em>Escrito por {author}</em></p>}
+                <date>{date}</date>
+                {/*<Box>{this.props.date}</Box>*/}
+                <article>
+                    {children}
+                </article>
+            </section>
+        )
+    }
+}
+
+
+
+
+
+
+/*Para instalar la dependecia de las props type:
+npm install props-types -SE
+
+*/
+
+//Forma de aplicar las propTypes
+
+// ArticleWithCondition.propTypes = {
+//     author:PropTypes.string
+// }
+
+class ArticleWithCondition extends Component {
+    //Forma mas comun
+    static propTypes = {
+        author: PropTypes.string
+    }
+
+    constructor(props) {
+        super(props)
+        if(typeof props.author === 'undefined') {
+            console.warn('author prop is required')
+            throw new Error('author props is required')
+        }
+    }
+    render() {
+        const {author, children, date, title } =this.props
+        return (
+            <section style={{borderBottom: '1px solid #100', marginBotton: 50 }}>
+                <h2>{title}</h2>
+                {author && <p><em>Escrito por {author}</em></p>}
+                <date>{date}</date>
+                {/*<Box>{this.props.date}</Box>*/}
+                <article>
+                    {children}
+                </article>
+            </section>
+        )
+    }
+}
+
+
+class Article extends Component {
+    render() {
+        return (
+            <section>
+                <h2>{this.props.title}</h2>
+                <p><em>Escrito por {this.props.author}</em></p>
+                <Box>{this.props.date}</Box>
+                <article>
+                    {this.props.children}
+                </article>
+            </section>
+        )
+    }
+}
+
+class Box extends Component {
+    render() {
+        return (
+            <div style={{border: '1px solid #09f', margin: 5, padding: 5}}>
+                {this.props.children}
+            </div>
+        )
+    }
+
+}
 
 class CarItem extends Component{
     render() {
@@ -241,6 +342,61 @@ class App extends Component {
               <h4>Formularios</h4>
 
               <Forms/>
+
+              <h4>Children props</h4>
+              <Box>Hola! Soy un children</Box>
+              <Box>Hola! Soy otro children con otro contenido</Box>
+
+              <h4>Children props Layout</h4>
+              <Article
+                  author='Miguel'
+                  date={new Date().toLocaleDateString()}
+                  title='Articulo sobre prop childre'
+                  >
+                  <p>El contenido que envolvemos dentro del componente Article sera enviado al componenete como this.props.children</p>
+                  <strong>Y mantiene las etiquetas y componenetes que hayas añadido dentro</strong>
+              </Article>
+
+              <Article
+                  author='Jose'
+                  date={new Date().toLocaleDateString()}
+                  title='Articulo sobre prop childre 2'
+              >
+                  <p>El contenido que envolvemos dentro del componente Article 2 sera enviado al componenete como this.props.children</p>
+                  <strong>Y mantiene las etiquetas y componenetes que hayas añadido dentro</strong>
+              </Article>
+
+              <Article
+                  author='Selomit'
+                  date={new Date().toLocaleDateString()}
+                  title='Articulo sobre prop childre 3'
+              >
+                  <p>El contenido que envolvemos dentro del componente Article 3 sera enviado al componenete como this.props.children</p>
+                  <strong>Y mantiene las etiquetas y componenetes que hayas añadido dentro</strong>
+              </Article>
+
+              <h1>Children props Layout with condition y los props type</h1>
+
+              <ArticleWithCondition
+                  author={true}
+                  date={new Date().toLocaleDateString()}
+                  title='Articulo sobre prop childre'
+              >
+                  <p>El contenido que envolvemos dentro del componente Article sera enviado al componenete como this.props.children</p>
+                  <strong>Y mantiene las etiquetas y componenetes que hayas añadido dentro</strong>
+              </ArticleWithCondition>
+
+
+              <h1>Children props Layout with condition y los props type</h1>
+
+              <ArticleWithConditionAndPropTypes
+                  // author='Antonito'
+                  date={new Date().toLocaleDateString()}
+                  title='Articulo sobre prop childre'
+              >
+                  <p>El contenido que envolvemos dentro del componente Article sera enviado al componenete como this.props.children</p>
+                  <strong>Y mantiene las etiquetas y componenetes que hayas añadido dentro</strong>
+              </ArticleWithConditionAndPropTypes>
 
 
           </header>
