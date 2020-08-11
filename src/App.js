@@ -6,6 +6,10 @@ import ConditionalSection from "./sections/conditional";
 import cars from './data/cars.json'
 import Forms from "./sections/forms";
 import PropTypes from 'prop-types'
+import ComponentWillMount from './sections/life-cycle/componentWillMount'
+import Render from './sections/life-cycle/render'
+import EjemploDeComponenteDidMount from './sections/life-cycle/ejemploDeComponenteDidMount'
+import FetchExample from './sections/fetch-example'
 
 
 
@@ -232,12 +236,24 @@ class Text extends Component{
 }
 
 class App extends Component {
-    constructor() {
-        super()
-        this.state = {mouseX: 0, mouseY: 0}
+    constructor(props) {
+        console.log('constructor')
+        super(props)  //Este metodo llama al constructor de Componente
+        //Inicializamos el state de nuestro componente
+        this.state = {mensajeInicial: 'Mensaje Inicial', mouseX: 0, mouseY: 0}
+        //bindeamos el contexto al metodo
+        // this.handleClickBinded = this.handleClickBinded.bind(this)
+
         this.handleMouseMove = this.handleMouseMove.bind(this)
 
     }
+    //Otra forma para no tener que bindear  contexto al metodo
+    handleClickBinded = () => {
+        this.setState({mensajeInicial: 'mensaje cambiado'})
+    }
+    // handleClickBinded (){
+    //     this.setState({mensajeInicial: 'mensaje cambiado'})
+    // }
 
     handleMouseMove (e) {
         const { clientX, clientY } = e
@@ -255,6 +271,7 @@ class App extends Component {
         alert('hi there!!')
     }
   render() {
+        console.log('render')
       const numbers = [1, 1, 3, 4, 5]
     return (
         <div className="App">
@@ -397,6 +414,19 @@ class App extends Component {
                   <p>El contenido que envolvemos dentro del componente Article sera enviado al componenete como this.props.children</p>
                   <strong>Y mantiene las etiquetas y componenetes que hayas añadido dentro</strong>
               </ArticleWithConditionAndPropTypes>
+
+              <h4>Ciclo de montaje: constructor</h4>
+              {this.state.mensajeInicial}
+              <button onClick={this.handleClickBinded}>
+                  Cambiar mensaje
+              </button>
+
+
+              <ComponentWillMount />
+              <EjemploDeComponenteDidMount />
+
+              <Render />
+              <FetchExample />
 
 
           </header>
