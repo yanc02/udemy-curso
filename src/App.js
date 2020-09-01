@@ -12,6 +12,7 @@ import EjemploDeComponenteDidMount from './sections/life-cycle/ejemploDeComponen
 import FetchExample from './sections/fetch-example'
 import EjemploCicloDeActualizacion from "./sections/life-cycle/ejemploCicloDeActualizacion";
 import EjemploDeComponenteWillUnmount from "./sections/life-cycle/ejemploDeComponenteWillUnmount";
+import EjemploDeComponenteDidCatch from "./sections/life-cycle/ejemploDeComponenteDidCatch";
 
 
 
@@ -432,6 +433,8 @@ class App extends Component {
               <EjemploCicloDeActualizacion />
 
               <EjemploDeComponenteWillUnmount />
+
+              <EjemploDeComponenteDidCatch />
 
 
           </header>
