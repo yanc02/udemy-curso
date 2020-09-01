@@ -10,7 +10,7 @@ import ComponentWillMount from './sections/life-cycle/componentWillMount'
 import Render from './sections/life-cycle/render'
 import EjemploDeComponenteDidMount from './sections/life-cycle/ejemploDeComponenteDidMount'
 import FetchExample from './sections/fetch-example'
-
+import EjemploCicloDeActualizacion from "./sections/life-cycle/ejemploCicloDeActualizacion";
 
 
 
@@ -427,6 +427,8 @@ class App extends Component {
 
               <Render />
               <FetchExample />
+
+              <EjemploCicloDeActualizacion />
 
 
           </header>
